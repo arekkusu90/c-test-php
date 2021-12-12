@@ -17,7 +17,7 @@
                 </template>
 
                 <template v-else>
-                    <div class="q-markup-table q-table__container q-table__card q-table--horizontal-separator q-table--no-wrap">
+                    <div class="q-markup-table q-table__container q-table__card q-table--horizontal-separator q-table--no-wrap overflow-hidden-y">
                         <table class="q-table">
                             <thead>
                             <tr>
@@ -55,7 +55,7 @@
                                 </th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody name="rows" is="transition-group">
                             <tr v-for="user in userListSorted" :key="user.id">
                                 <td>{{user.id}}</td>
                                 <td>{{user.name}}</td>
@@ -141,7 +141,11 @@
     })
 </script>
 
-
+<style lang="css">
+    .rows-move {
+        transition: transform 0.6s;
+    }
+</style>
 
 
 
