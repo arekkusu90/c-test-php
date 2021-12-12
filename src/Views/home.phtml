@@ -1,0 +1,127 @@
+<div id="clx-home">
+    <q-layout view="hHh lpR fFf">
+        <q-header elevated class="bg-primary text-white">
+            <q-toolbar>
+                <q-toolbar-title>
+                    Home
+                </q-toolbar-title>
+            </q-toolbar>
+        </q-header>
+
+        <q-page-container class="bg-grey-2">
+            <q-page padding>
+                <q-form method="post" action="users">
+                    <q-card>
+                        <q-card-section>
+                            <div class="row q-col-gutter-md">
+                                <!-- STATO UTENTE -->
+                                <!-- ------------ -->
+                                <div class="col-12">
+                                    Filter by user status
+                                    <q-radio v-model="active" :val="-1" name="active" label="Any"></q-radio>
+                                    <q-radio v-model="active" :val="1" name="active" label="Enabled"></q-radio>
+                                    <q-radio v-model="active" :val="0" name="active" label="Disabled"></q-radio>
+                                </div>
+
+                                <!-- DATA DI ATTIVITA' -->
+                                <!-- ----------------- -->
+                                <div class="col-12 col-md-6">
+                                    <q-input
+                                            v-model="from"
+                                            type="text"
+                                            label="From"
+                                            name="from"
+                                            mask="##/##/#### ##:##"
+                                            hint="Inserire nel formato gg/mm/yyyy hh:mm"
+                                    ></q-input>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <q-input
+                                            v-model="to"
+                                            type="text"
+                                            label="To"
+                                            name="to"
+                                            mask="##/##/#### ##:##"
+                                            hint="Inserire nel formato gg/mm/yyyy hh:mm"
+                                    ></q-input>
+                                </div>
+
+                                <!-- NOME E COGNOME -->
+                                <!-- -------------- -->
+                                <div class="col-12 col-md-6">
+                                    <q-input
+                                            v-model="name"
+                                            type="text"
+                                            label="Name"
+                                            name="name"
+                                    ></q-input>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <q-input
+                                            v-model="surname"
+                                            type="text"
+                                            label="Surname"
+                                            name="surname"
+                                    ></q-input>
+                                </div>
+
+
+                                <!-- TIPO DI VISTA -->
+                                <!-- ------------- -->
+                                <div class="col-12">
+                                    <q-select
+                                            v-model="view"
+                                            :options="viewOptionList"
+                                            label="View"
+                                            name="view"
+                                            emit-value
+                                            map-options
+                                    ></q-select>
+                                </div>
+                            </div>
+                        </q-card-section>
+
+
+                        <q-card-section class="text-right">
+                            <q-btn label="Submit" type="submit" color="primary" unelevated></q-btn>
+                        </q-card-section>
+                    </q-card>
+                </q-form>
+            </q-page>
+        </q-page-container>
+    </q-layout>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@1.16.3/dist/quasar.umd.min.js"></script>
+
+<script>
+    new Vue({
+        el: '#clx-home',
+        data: function () {
+            return {
+                active: -1,
+                from: null,
+                to: null,
+                name: null,
+                surname: null,
+                view: 'table',
+                viewOptionList: [
+                    {value: 'table', label: 'Table'},
+                    {value: 'thumb', label: 'Thumbnail'},
+                ]
+            }
+        },
+        methods: {},
+    })
+</script>
+
+
+<style lang="css">
+    .q-page {
+        max-width: 800px;
+        margin: auto;
+    }
+</style>

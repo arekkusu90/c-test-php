@@ -1,0 +1,66 @@
+<div id="clx-user-list-card">
+    <q-layout view="hHh lpR fFf">
+        <q-header elevated class="bg-primary text-white">
+            <q-toolbar>
+                <q-toolbar-title>
+                    User List Card
+                </q-toolbar-title>
+            </q-toolbar>
+        </q-header>
+
+        <q-page-container class="bg-grey-2">
+            <q-page padding>
+                <template v-if="userList.length <= 0">
+                    <q-banner class="bg-blue-2">
+                        No user found
+                    </q-banner>
+                </template>
+
+                <template v-else>
+                    <div class="row q-col-gutter-md">
+                        <div v-for="user in userList" :key="user.id" class="col-12 col-sm-4 col-md-2 col-lg-1">
+                            <q-card class="full-height">
+                                <q-img :src="user.picture" :ratio="16/9" transition="fade"></q-img>
+
+                                <q-card-section>
+                                    <div>Name: <span class="text-bold">{{user.name}}</span></div>
+                                    <div>Surname: <span class="text-bold">{{user.surname}}</span></div>
+                                    <div>
+                                        Last login: <span class="text-bold">{{dateFormat(user.last_login, 'D MMM YYYY HH:mm')}}</span>
+                                    </div>
+                                </q-card-section>
+                            </q-card>
+                        </div>
+                    </div>
+                </template>
+            </q-page>
+        </q-page-container>
+    </q-layout>
+</div>
+
+<?= $this->fetch('./scripts.phtml') ?>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#clx-user-list-card',
+        data: function () {
+            return {
+                userList: <?= json_encode($userList) ?>,
+            }
+        },
+        computed: {},
+        methods: {
+            dateFormat: Quasar.utils.date.formatDate,
+        }
+    })
+</script>
+
+
+
+
+
+
+
+
+
+

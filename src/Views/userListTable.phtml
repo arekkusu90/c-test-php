@@ -1,0 +1,152 @@
+<div id="clx-user-list-table">
+    <q-layout view="hHh lpR fFf">
+        <q-header elevated class="bg-primary text-white">
+            <q-toolbar>
+                <q-toolbar-title>
+                    User List Table
+                </q-toolbar-title>
+            </q-toolbar>
+        </q-header>
+
+        <q-page-container class="bg-grey-2">
+            <q-page padding>
+                <template v-if="userList.length <= 0">
+                    <q-banner class="bg-blue-2">
+                        No user found
+                    </q-banner>
+                </template>
+
+                <template v-else>
+                    <div class="q-markup-table q-table__container q-table__card q-table--horizontal-separator q-table--no-wrap">
+                        <table class="q-table">
+                            <thead>
+                            <tr>
+                                <th class="text-left" @click="sort('id')">
+                                    Id
+                                    <template v-if="sortingProp === 'id'">
+                                        <q-icon :name="sortingOrder === 'DESC' ? 'arrow_downward' : 'arrow_upward'"></q-icon>
+                                    </template>
+                                </th>
+                                <th class="text-left" @click="sort('name')">
+                                    Name
+                                    <template v-if="sortingProp === 'name'">
+                                        <q-icon :name="sortingOrder === 'DESC' ? 'arrow_downward' : 'arrow_upward'"></q-icon>
+                                    </template>
+                                </th>
+                                <th class="text-left" @click="sort('surname')">
+                                    Surname
+                                    <template v-if="sortingProp === 'surname'">
+                                        <q-icon :name="sortingOrder === 'DESC' ? 'arrow_downward' : 'arrow_upward'"></q-icon>
+                                    </template>
+                                </th>
+                                <th class="text-left">Active</th>
+                                <th class="text-left" @click="sort('last_login')">
+                                    Last Login
+                                    <template v-if="sortingProp === 'last_login'">
+                                        <q-icon :name="sortingOrder === 'DESC' ? 'arrow_downward' : 'arrow_upward'"></q-icon>
+                                    </template>
+                                </th>
+                                <th class="text-left">Picture</th>
+                                <th class="text-left" @click="sort('rating')">
+                                    Rating
+                                    <template v-if="sortingProp === 'rating'">
+                                        <q-icon :name="sortingOrder === 'DESC' ? 'arrow_downward' : 'arrow_upward'"></q-icon>
+                                    </template>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="user in userListSorted" :key="user.id">
+                                <td>{{user.id}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.surname}}</td>
+                                <td>
+                                    <template v-if="user.active === 1">
+                                        <q-icon name="check" color="green" size="sm"></q-icon>
+                                    </template>
+                                    <template v-else>
+                                        <q-icon name="close" color="red" size="sm"></q-icon>
+                                    </template>
+                                </td>
+                                <td>{{dateFormat(user.last_login, 'D MMM YYYY HH:mm')}}</td>
+                                <td>
+                                    <q-img :src="user.picture" :ratio="16/9" transition="fade"></q-img>
+                                </td>
+                                <td>{{user.rating}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+            </q-page>
+        </q-page-container>
+    </q-layout>
+</div>
+
+<?= $this->fetch('./scripts.phtml') ?>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#clx-user-list-table',
+        data: function () {
+            return {
+                userList: <?= json_encode($userList) ?>,
+                sortingProp: null,
+                sortingOrder: 'ASC'
+            }
+        },
+        computed: {
+            userListSorted() {
+                if (!this.sortingProp) return this.userList;
+
+                let result = [].concat(this.userList);
+                let prop = this.sortingProp;
+
+                result.sort(function (a, b) {
+                    return a[prop] > b[prop] ? 1 : -1;
+                });
+
+                if (this.sortingOrder === 'DESC') {
+                    result.reverse();
+                }
+
+                return result;
+            }
+        },
+        methods: {
+            dateFormat: Quasar.utils.date.formatDate,
+            sort: function (prop) {
+                if (this.sortingProp === prop) {
+
+                    if (this.sortingOrder === 'DESC') {
+                        // Se stiamo già ordinando per questa colonna in modo decrecente
+                        // => deselezioniamo l'ordinamento
+                        this.sortingProp = null;
+                        this.sortingOrder = 'ASC';
+                    } else {
+                        // Se stiamo già ordinando per questa colonna in modo crescente
+                        // => ordiniamo in modo decrescente
+                        this.sortingProp = prop;
+                        this.sortingOrder = 'DESC';
+                    }
+
+                } else {
+                    // Se non stiamo ordinando per questa colonna
+                    // => ordiniamo in modo crescente
+                    this.sortingProp = prop;
+                    this.sortingOrder = 'ASC';
+                }
+            }
+        }
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
