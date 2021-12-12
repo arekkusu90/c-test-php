@@ -1,7 +1,6 @@
 # Requisiti
 
 * PHP >= 7.4
-* Estensione [ImageMagick][IMAGICK]
 
 # Getting started
 
@@ -26,11 +25,6 @@
 * __PHP-View:__  
   Libreria PHP per disaccoppiare le viste
   
-* __Intervention Image:__  
-  Libreria PHP per la gestione e manipolazione delle immagini.
-  Viene usato il driver "imagick" che necessita dell'apposita estensione
-  installata
-  
 * __Carbon:__  
   Libreria PHP per facilitare la gestione delle date
   
@@ -54,7 +48,3 @@ Una volta avviato il webserver avremo a disposizione due route:
    Disponibile alla url http://localhost:8000/users utilizzando il metodo POST.   
    Questa route espone può esporre una vista tra tabella di utenti e lista thumbnail
    di utenti in base ai parametri passati in input.
-
-
-
-[IMAGICK]: https://www.php.net/manual/en/book.imagick.php

@@ -1,20 +1,20 @@
 {
-    "name": "clx/test-php",
-    "license": "proprietary",
-    "description": "Test PHP",
-    "require": {
-        "php": ">= 7.4",
-        "ext-json": "*",
-        "slim/slim": "3.*",
-        "slim/php-view": "^3.1",
-        "intervention/image": "^2.7",
-        "nesbot/carbon": "^2.55"
-    },
-    "autoload": {
-        "psr-4": {
-            "Clx\\": [
-                "src/"
-            ]
-        }
+  "name": "clx/test-php",
+  "license": "proprietary",
+  "description": "Test PHP",
+  "require": {
+    "php": ">= 7.4",
+    "ext-json": "*",
+    "ext-gd": "*",
+    "slim/slim": "3.*",
+    "slim/php-view": "^3.1",
+    "nesbot/carbon": "^2.55"
+  },
+  "autoload": {
+    "psr-4": {
+      "Clx\\": [
+        "src/"
+      ]
     }
+  }
 }

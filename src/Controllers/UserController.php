@@ -4,7 +4,6 @@ namespace Clx\Controllers;
 
 use Carbon\Carbon;
 use Clx\Utils\Str;
-use Intervention\Image\ImageManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\PhpRenderer;
@@ -32,8 +31,6 @@ class UserController extends UserService
      */
     protected function resizeImage($path)
     {
-        $manager = new ImageManager(array('driver' => 'imagick'));
-
         $pathNew = explode('.', $path);
         $ext = array_pop($pathNew);
         array_push($pathNew, '-resized', '.', $ext);
@@ -41,11 +38,9 @@ class UserController extends UserService
 
         // Effettuiamo la conversione solo se non l'abbiamo già fatta in precedenza
         if (!file_exists($pathNew)) {
-            $manager->make($path)
-                ->resize(100, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save($pathNew);
+            $image = imagecreatefromjpeg($path);
+            $image = imagescale($image, 100, -1);
+            imagejpeg($image, $pathNew);
         }
 
         return $pathNew;
