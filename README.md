@@ -34,7 +34,7 @@
 * __Carbon:__  
   Libreria PHP per facilitare la gestione delle date
   
-* VueJs:  
+* __VueJs:__  
   Framework JS per gestire al meglio la renderizzazione e l'interazione delle view
 
 * __Quasar Framework:__  
@@ -50,7 +50,7 @@ Una volta avviato il webserver avremo a disposizione due route:
    Disponibile alla url http://localhost:8000/ utilizzando il metodo GET (ipotizzando che sia esposto sulla porta 8000).  
    Questa route espone una sola vista contenente un semplice form in cui decidere i filtri da applicare nella route successiva.
    
-2. __Lista utenti:__
+2. __Lista utenti:__  
    Disponibile alla url http://localhost:8000/users utilizzando il metodo POST.   
    Questa route espone può esporre una vista tra tabella di utenti e lista thumbnail
    di utenti in base ai parametri passati in input.
