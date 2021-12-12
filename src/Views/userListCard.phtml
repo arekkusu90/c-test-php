@@ -22,11 +22,11 @@
                             <q-card class="full-height">
                                 <q-img :src="user.picture" :ratio="16/9" transition="fade"></q-img>
 
-                                <q-card-section>
-                                    <div>Name: <span class="text-bold">{{user.name}}</span></div>
-                                    <div>Surname: <span class="text-bold">{{user.surname}}</span></div>
+                                <q-card-section class="q-gutter-y-sm">
+                                    <div>Name: <br> <span class="text-bold">{{user.name}}</span></div>
+                                    <div>Surname: <br> <span class="text-bold">{{user.surname}}</span></div>
                                     <div>
-                                        Last login: <span class="text-bold">{{dateFormat(user.last_login, 'D MMM YYYY HH:mm')}}</span>
+                                        Last login: <br> <span class="text-bold">{{dateFormat(user.last_login, 'DD/MM/YYYY HH:mm:ss')}}</span>
                                     </div>
                                 </q-card-section>
                             </q-card>
