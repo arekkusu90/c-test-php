@@ -10,11 +10,14 @@
    composer install
    ```
 
-2. Avviare il webserver built in
+2. Avviare il web server built in
 
    ```shell script
    PATH/TO/php.exe -S 0.0.0.0:8000 -t PATH/TO/PROJECT
    ```
+   
+   Nel caso in cui si decida di utilizzare Apache come web server, deve essere configurato 
+   come descritto nel seguente link: https://www.slimframework.com/docs/v3/start/web-servers.html
 
 
 # Risorse utilizzate
